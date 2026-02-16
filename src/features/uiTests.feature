@@ -50,3 +50,6 @@ Feature: Test UI methods
     Examples:
       | individualName | firmName        | location | guide |
       | Mark London    | Devonshires LLP | London   | UK    |
+
+  Scenario: Verify that search results are displayed when user searches with valid keyword
+    Given I query db and print results

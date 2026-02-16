@@ -1,12 +1,15 @@
-import winston from 'winston';
+import { createLogger, format, transports } from 'winston';
 
-export const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.printf(({ timestamp, level, message }) => {
-      return `${timestamp} [${level.toUpperCase()}] ${message}`;
+const logLevel = 'info';
+
+export const logger = createLogger({
+  level: logLevel,
+  format: format.combine(
+    format.colorize(),
+    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level}] ${message}`;
     })
   ),
-  transports: [new winston.transports.Console()],
+  transports: [new transports.Console(), new transports.File({ filename: 'test-run.log' })],
 });
