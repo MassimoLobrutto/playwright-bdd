@@ -1,3 +1,5 @@
+/* eslint-disable no-empty-pattern */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { test as base, createBdd } from 'playwright-bdd';
 import { SearchPage } from '../pages/ui-tests/searchPage';
 import { RankingsTablePage } from '../pages/ui-tests/rankingsTablePage';
@@ -35,7 +37,23 @@ function getPageFiles() {
   };
 }
 
-export const test = base.extend<Fixtures>(getPageFiles());
+type ApiFixtures = {
+  apiResponse: {
+    last: any;
+  };
+};
+
+type CombinedFixtures = Fixtures & ApiFixtures;
+
+export const test = base.extend<CombinedFixtures>({
+  // Spread the existing page file fixtures
+  ...getPageFiles(),
+
+  // Add the new apiResponse fixture
+  apiResponse: async ({}, use) => {
+    await use({ last: null });
+  },
+});
 
 export const { Given, When, Then } = createBdd(test);
 
