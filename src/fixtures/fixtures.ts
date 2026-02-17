@@ -1,14 +1,18 @@
 import { test as base, createBdd } from 'playwright-bdd';
-import { SearchPage } from '../pages/chambers/searchPage';
-import { RankingsTablePage } from '../pages/chambers/rankingsTablePage';
-import { LawyerPage } from '../pages/chambers/lawyerPage';
-import { FirmPage } from '../pages/chambers/firmPage';
+import { SearchPage } from '../pages/ui-tests/searchPage';
+import { RankingsTablePage } from '../pages/ui-tests/rankingsTablePage';
+import { LawyerPage } from '../pages/ui-tests/lawyerPage';
+import { FirmPage } from '../pages/ui-tests/firmPage';
+import { LoginPage } from '../pages/stored-auth-tests/login-page';
+import { Page } from '@playwright/test';
 
 interface Fixtures {
   searchPage: SearchPage;
   firmPage: FirmPage;
   lawyerPage: LawyerPage;
   rankingsTablePage: RankingsTablePage;
+  loginPage: LoginPage;
+  page: Page;
 }
 
 function getPageFiles() {
@@ -24,6 +28,9 @@ function getPageFiles() {
     },
     lawyerPage: async ({ page }, use) => {
       await use(new LawyerPage(page));
+    },
+    loginPage: async ({ page }, use) => {
+      await use(new LoginPage(page));
     },
   };
 }

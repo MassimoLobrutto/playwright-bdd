@@ -1,4 +1,4 @@
-import { databaseName, queryDb } from '../../helper/utils/sqlDb';
+import { databaseName, queryDb } from '../../helper/database/sql-database';
 import { Given } from '../../fixtures/fixtures';
 import { logger } from '../../helper/logger/logger';
 

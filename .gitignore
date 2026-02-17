@@ -23,3 +23,6 @@ logs/
 .vscode/*
 !.vscode/launch.json  # Keep this so your debug profile works for others!
 .idea/
+
+# Playwright authentication sessions
+playwright/.auth/

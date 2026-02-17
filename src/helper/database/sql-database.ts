@@ -1,4 +1,4 @@
-import { logger } from '../../helper/logger/logger';
+import { logger } from '../logger/logger';
 import sql from 'mssql';
 import * as dotenv from 'dotenv';
 import path from 'node:path';
@@ -8,7 +8,7 @@ export enum databaseName {
   shieldstudent = 'shieldstudent',
 }
 
-const env = (process.env.ENV || 'uat').toLowerCase();
+const env = (process.env.ENV || 'qa').toLowerCase();
 const envPath = path.resolve(process.cwd(), `env/.env.${env}`);
 
 if (fs.existsSync(envPath)) {
