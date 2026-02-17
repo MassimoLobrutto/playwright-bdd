@@ -5,7 +5,7 @@ import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
 const testDir = defineBddConfig({
   features: 'src/features/**/*.feature',
   // ✅ FIX: Tell BDD to ignore the setup file so it doesn't try to parse it as steps
-  steps: ['src/specs/**/*.ts', '!src/specs/auth.setup.ts'],
+  steps: ['src/steps/**/*.ts', '!src/steps/auth.setup.ts'],
   importTestFrom: 'src/fixtures/fixtures.ts',
   disableWarnings: {
     importTestFrom: true,
@@ -14,7 +14,7 @@ const testDir = defineBddConfig({
 
 export default defineConfig({
   // ✅ Ensure this path is 100% correct relative to this config file
-  globalSetup: require.resolve('./src/specs/auth.setup.ts'),
+  globalSetup: require.resolve('./src/steps/auth.setup.ts'),
   testDir,
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
