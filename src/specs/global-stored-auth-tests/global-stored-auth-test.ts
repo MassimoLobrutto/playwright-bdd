@@ -1,7 +1,6 @@
 import { expect, Given, Then } from '../../fixtures/fixtures';
 
 Given('I navigate to the inventory page', async ({ page }) => {
-  // We go STRAIGHT to the internal page, skipping the login URL
   await page.goto('https://www.saucedemo.com/inventory.html');
 });
 

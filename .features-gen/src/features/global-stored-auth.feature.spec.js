@@ -1,7 +1,7 @@
-// Generated from: src\features\storage-auth-tests.feature
+// Generated from: src\features\global-stored-auth.feature
 import { test } from "../../../src/fixtures/fixtures.ts";
 
-test.describe('Session Validation', () => {
+test.describe('Session Validation using Stored Authentication from Playwright Config', () => {
 
   test('Verify direct access to inventory', async ({ Given, Then, page }) => { 
     await Given('I navigate to the inventory page', null, { page }); 
@@ -14,7 +14,7 @@ test.describe('Session Validation', () => {
 
 test.use({
   $test: [({}, use) => use(test), { scope: 'test', box: true }],
-  $uri: [({}, use) => use('src\\features\\storage-auth-tests.feature'), { scope: 'test', box: true }],
+  $uri: [({}, use) => use('src\\features\\global-stored-auth.feature'), { scope: 'test', box: true }],
   $bddFileData: [({}, use) => use(bddFileData), { scope: "test", box: true }],
 });
 

@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'node:path';
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
 
 const testDir = defineBddConfig({
@@ -27,8 +28,6 @@ export default defineConfig({
     ['html', { open: 'never' }],
   ],
   use: {
-    // This is the default storage state for all projects
-    storageState: 'playwright/.auth/user.json',
     screenshot: 'only-on-failure',
     trace: 'on',
   },
@@ -37,7 +36,9 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        storageState: path.resolve(__dirname, 'playwright/.auth/sauce_user.json'),
       },
+      testMatch: /.*\.feature/,
     },
   ],
 });
