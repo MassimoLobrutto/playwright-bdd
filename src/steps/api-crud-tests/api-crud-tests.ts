@@ -1,4 +1,3 @@
-/* eslint-disable no-empty-pattern */
 import { expect, Given, When, Then } from '../../fixtures/fixtures';
 import { logger } from '../../helper/logger/logger'; // Adjust path to your logger
 

@@ -28,7 +28,7 @@ export default defineConfig({
     ['html', { open: 'never' }],
   ],
   use: {
-    screenshot: 'only-on-failure',
+    screenshot: process.env.CI ? 'only-on-failure' : 'off',
     trace: 'on',
   },
   projects: [

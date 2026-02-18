@@ -1,38 +1,38 @@
 /* eslint-disable no-empty-pattern */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { test as base, createBdd } from 'playwright-bdd';
-import { SearchPage } from '../pages/ui-tests/searchPage';
-import { RankingsTablePage } from '../pages/ui-tests/rankingsTablePage';
-import { LawyerPage } from '../pages/ui-tests/lawyerPage';
-import { FirmPage } from '../pages/ui-tests/firmPage';
 import { LoginPage } from '../pages/stored-auth-tests/login-page';
 import { Page } from '@playwright/test';
+import { Homepage } from '../pages/ui-tests/home-page';
+import { AdminLoginPage } from '../pages/ui-tests/admin-login-page';
+import { AdminDashboardPage } from '../pages/ui-tests/admin-dashboard-page';
+import { RoomPage } from '../pages/ui-tests/room-page';
 
 interface Fixtures {
-  searchPage: SearchPage;
-  firmPage: FirmPage;
-  lawyerPage: LawyerPage;
-  rankingsTablePage: RankingsTablePage;
   loginPage: LoginPage;
+  homepage: Homepage;
+  adminLoginPage: AdminLoginPage;
+  adminDashboardPage: AdminDashboardPage;
+  roomPage: RoomPage;
   page: Page;
 }
 
 function getPageFiles() {
   return {
-    searchPage: async ({ page }, use) => {
-      await use(new SearchPage(page));
-    },
-    rankingsTablePage: async ({ page }, use) => {
-      await use(new RankingsTablePage(page));
-    },
-    firmPage: async ({ page }, use) => {
-      await use(new FirmPage(page));
-    },
-    lawyerPage: async ({ page }, use) => {
-      await use(new LawyerPage(page));
-    },
     loginPage: async ({ page }, use) => {
       await use(new LoginPage(page));
+    },
+    homepage: async ({ page }, use) => {
+      await use(new Homepage(page));
+    },
+    adminLoginPage: async ({ page }, use) => {
+      await use(new AdminLoginPage(page));
+    },
+    adminDashboardPage: async ({ page }, use) => {
+      await use(new AdminDashboardPage(page));
+    },
+    roomPage: async ({ page }, use) => {
+      await use(new RoomPage(page));
     },
   };
 }

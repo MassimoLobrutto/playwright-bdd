@@ -1,52 +1,27 @@
 Feature: Test UI methods
-  As a Chambers.com user
-  I want to be able to search firm or lawyer
-  So that I can verify if correct firm or lawyer profile is displayed
+  As an admin user
+  I want to be able to login to the admin dashboard
+  To make changes to the content
+  So that I can keep the website up to date
 
   @uiTests
   @regression
-  Scenario Outline: Global Search Firm
-    Given I navigate to Chambers new homepage
-    When I search on global header with "firm", "<name>", "<na>", "<location>" and "<guide>"
-    And I am navigated to "firm" "<name>" page
-
-    # title-format: Global Search Firm: <name> in <location>
-    Examples:
-      | name           | na | location | guide |
-      | Baker McKenzie | na | Chicago  | USA   |
+  Scenario: Login to admin dashboard
+    Given I navigate to shady meadows admin page
+    When I login with valid credentials
+    Then I should see the admin dashboard
 
   @uiTests
   @regression
-  Scenario Outline: Global Search Individual
-    Given I navigate to Chambers new homepage
-    When I search on global header with "individual", "<name>", "<firmName>", "<location>" and "<guide>"
-    And I am navigated to "individual" "<name>" page
+  Scenario Outline: Book a room
+    Given I navigate to the homepage
+    When I search for available rooms from "<checkInDate>" to "<checkOutDate>"
+    When I select "<roomType>" room and check that the price per night is "<pricePernight>"
+    When I check that the total price is "<totalPrice>" and then reserve the room
+    When I fill in the booking form with valid details and submit
+    #Then I should see a Booking Confirmed message
 
-    # title-format: Global Search Individual: <name> at <firmName>
     Examples:
-      | name        | firmName        | location | guide |
-      | Mark London | Devonshires LLP | London   | UK    |
-
-  @uiTests
-  @regression
-  Scenario Outline: Home Page Search Firm
-    Given I navigate to Chambers new homepage
-    When I search on home page with "firm", "<name>", "<firmName>", "<location>" and "<guide>"
-    And I am navigated to "firm" "<name>" page
-
-    # title-format: Home Page Search Firm: <name>
-    Examples:
-      | name           | na | location | guide |
-      | Baker McKenzie | na | Chicago  | USA   |
-
-  @uiTests
-  @regression
-  Scenario Outline: Home Page Search Individual
-    Given I navigate to Chambers new homepage
-    When I search on home page with "individual", "<individualName>", "<firmName>", "<location>" and "<guide>"
-    And I am navigated to "individual" "<individualName>" page
-
-    # title-format: Home Page Search Individual: <individualName>
-    Examples:
-      | individualName | firmName        | location | guide |
-      | Mark London    | Devonshires LLP | London   | UK    |
+        | roomType | checkInDate | checkOutDate | pricePernight | totalPrice |
+        | Single   | 05/03/2026  | 10/03/2026   | 100           | 540        |
+        | Double   | 05/04/2026  | 10/04/2026   | 150           | 790        |
