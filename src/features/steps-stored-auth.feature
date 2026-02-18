@@ -1,6 +1,7 @@
 Feature: Session Validation using Stored Authentication from tests file
 
-  @booker
+  @stepStoredAuthTests
+  @regression
   Scenario: Verify Admin can see the room management list
     Given I am on the Booker Admin dashboard
     Then I should see the "Rooms" management section

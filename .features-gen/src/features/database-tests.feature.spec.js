@@ -3,7 +3,7 @@ import { test } from "../../../src/fixtures/fixtures.ts";
 
 test.describe('Test Database methods', () => {
 
-  test('Verify database query results are printed correctly', async ({ Given }) => { 
+  test('Verify database query results are printed correctly', { tag: ['@databaseTests', '@regression'] }, async ({ Given }) => { 
     await Given('I query db and print results'); 
   });
 
@@ -18,5 +18,5 @@ test.use({
 });
 
 const bddFileData = [ // bdd-data-start
-  {"pwTestLine":6,"pickleLine":6,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":7,"keywordType":"Context","textWithKeyword":"Given I query db and print results","stepMatchArguments":[]}]},
+  {"pwTestLine":6,"pickleLine":8,"tags":["@databaseTests","@regression"],"steps":[{"pwStepLine":7,"gherkinStepLine":9,"keywordType":"Context","textWithKeyword":"Given I query db and print results","stepMatchArguments":[]}]},
 ]; // bdd-data-end

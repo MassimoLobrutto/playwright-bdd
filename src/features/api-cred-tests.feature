@@ -1,6 +1,8 @@
-@api
+
 Feature: API CRUD Operations
 
+  @apiTests
+  @regression
   Scenario: Create, Read, Update, and Delete a post
     Given I send a POST request to "/posts" with title "BDD Test" and body "Playwright is awesome"
     Then the response status should be 201

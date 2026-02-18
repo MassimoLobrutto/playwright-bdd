@@ -1,50 +1,36 @@
 import { expect, Given, When, Then } from '../../fixtures/fixtures';
-import { logger } from '../../helper/logger/logger'; // Adjust path to your logger
-
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
+import { logger } from '../../helper/logger/logger';
 
 Given(
   'I send a POST request to {string} with title {string} and body {string}',
-  async ({ request, apiResponse }, path, title, body) => {
-    const url = `${BASE_URL}${path}`;
-    logger.info(`🚀 POST Request to: ${url}`);
-
-    apiResponse.last = await request.post(url, {
-      data: { title, body, userId: 1 },
-    });
+  async ({ apiController, apiResponse }, path, title, body) => {
+    apiResponse.last = await apiController.createPost(path, title, body);
 
     const responseBody = await apiResponse.last.json();
-    logger.info(`✅ POST Response Status: ${apiResponse.last.status()}`);
+
+    // Now we ARE reading the value, so the error vanishes!
     logger.info(`📦 Response Body: ${JSON.stringify(responseBody)}`);
+
+    // Optional: Standard industry practice is to assert something immediately
+    expect(responseBody.title).toBe(title);
   }
 );
 
-When('I send a GET request to {string}', async ({ request, apiResponse }, path) => {
-  const url = `${BASE_URL}${path}`;
-  logger.info(`🔍 GET Request to: ${url}`);
-
-  apiResponse.last = await request.get(url);
-
+When('I send a GET request to {string}', async ({ apiController, apiResponse }, path) => {
+  apiResponse.last = await apiController.getPost(path);
   logger.info(`✅ GET Response Status: ${apiResponse.last.status()}`);
 });
 
-When('I send a PUT request to {string} with updated title {string}', async ({ request, apiResponse }, path, title) => {
-  const url = `${BASE_URL}${path}`;
-  logger.info(`🔄 PUT Request to: ${url}`);
+When(
+  'I send a PUT request to {string} with updated title {string}',
+  async ({ apiController, apiResponse }, path, title) => {
+    apiResponse.last = await apiController.updatePost(path, title);
+    logger.info(`✅ PUT Response Status: ${apiResponse.last.status()}`);
+  }
+);
 
-  apiResponse.last = await request.put(url, {
-    data: { id: 1, title, body: 'updated body', userId: 1 },
-  });
-
-  logger.info(`✅ PUT Response Status: ${apiResponse.last.status()}`);
-});
-
-When('I send a DELETE request to {string}', async ({ request, apiResponse }, path) => {
-  const url = `${BASE_URL}${path}`;
-  logger.info(`🗑️ DELETE Request to: ${url}`);
-
-  apiResponse.last = await request.delete(url);
-
+When('I send a DELETE request to {string}', async ({ apiController, apiResponse }, path) => {
+  apiResponse.last = await apiController.deletePost(path);
   logger.info(`✅ DELETE Response Status: ${apiResponse.last.status()}`);
 });
 

@@ -17,8 +17,8 @@ export default defineConfig({
   globalSetup: require.resolve('./src/steps/auth.setup.ts'),
   testDir,
   fullyParallel: true,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 4 : 4,
+  retries: process.env.CI ? 2 : 1,
+  workers: process.env.CI ? 4 : 3,
 
   reporter: [
     cucumberReporter('html', {
@@ -28,6 +28,7 @@ export default defineConfig({
     ['html', { open: 'never' }],
   ],
   use: {
+    baseURL: 'https://jsonplaceholder.typicode.com',
     screenshot: process.env.CI ? 'only-on-failure' : 'off',
     trace: 'on',
   },

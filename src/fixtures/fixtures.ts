@@ -7,6 +7,7 @@ import { Homepage } from '../pages/ui-tests/home-page';
 import { AdminLoginPage } from '../pages/ui-tests/admin-login-page';
 import { AdminDashboardPage } from '../pages/ui-tests/admin-dashboard-page';
 import { RoomPage } from '../pages/ui-tests/room-page';
+import { ApiController } from '../helper/api/api-helper';
 
 interface Fixtures {
   loginPage: LoginPage;
@@ -38,9 +39,8 @@ function getPageFiles() {
 }
 
 type ApiFixtures = {
-  apiResponse: {
-    last: any;
-  };
+  apiController: ApiController; // Name must match the implementation below
+  apiResponse: { last: any };
 };
 
 type CombinedFixtures = Fixtures & ApiFixtures;
@@ -48,8 +48,15 @@ type CombinedFixtures = Fixtures & ApiFixtures;
 export const test = base.extend<CombinedFixtures>({
   // Spread the existing page file fixtures
   ...getPageFiles(),
+  apiController: async ({ request, baseURL }, use) => {
+    // No more hardcoded strings!
+    // It takes the URL from your config.
+    // If baseURL is missing, we provide a fallback or throw an error.
+    const controller = new ApiController(request, baseURL || '');
 
-  // Add the new apiResponse fixture
+    await use(controller);
+  },
+
   apiResponse: async ({}, use) => {
     await use({ last: null });
   },
