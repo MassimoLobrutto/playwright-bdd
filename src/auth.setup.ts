@@ -1,13 +1,13 @@
 import { chromium, expect } from '@playwright/test';
-import { logger } from '../helper/logger/logger';
+import { logger } from './helper/logger/logger';
 import path from 'node:path';
 
 async function globalSetup() {
   const browser = await chromium.launch();
 
   // Define absolute paths for both session files
-  const sauceFile = path.resolve(__dirname, '../../playwright/.auth/sauce_user.json');
-  const bookerFile = path.resolve(__dirname, '../../playwright/.auth/booker_user.json');
+  const sauceFile = path.resolve(__dirname, '.auth/sauce_user.json');
+  const bookerFile = path.resolve(__dirname, '.auth/booker_user.json');
 
   // --- 1. SAUCE LABS SETUP ---
   logger.info('🚀 Starting SauceLabs UI Setup...');

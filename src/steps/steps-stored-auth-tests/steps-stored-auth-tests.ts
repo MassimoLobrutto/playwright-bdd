@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { expect, Given, Then } from '../../fixtures/fixtures';
 
 Given('I am on the Booker Admin dashboard', async ({ page }) => {
-  const authPath = path.resolve(__dirname, '../../../playwright/.auth/booker_user.json');
+  const authPath = path.resolve(__dirname, '../../.auth/booker_user.json');
   const authData = JSON.parse(fs.readFileSync(authPath, 'utf-8'));
 
   await page.context().clearCookies();

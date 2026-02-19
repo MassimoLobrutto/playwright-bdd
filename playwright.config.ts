@@ -13,8 +13,7 @@ const testDir = defineBddConfig({
 });
 
 export default defineConfig({
-  // ✅ Ensure this path is 100% correct relative to this config file
-  globalSetup: require.resolve('./src/steps/auth.setup.ts'),
+  globalSetup: require.resolve('./src/auth.setup.ts'),
   testDir,
   fullyParallel: true,
   retries: process.env.CI ? 2 : 1,
@@ -37,7 +36,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: path.resolve(__dirname, 'playwright/.auth/sauce_user.json'),
+        storageState: path.resolve(__dirname, 'src/.auth/sauce_user.json'),
       },
       testMatch: /.*\.feature/,
     },
