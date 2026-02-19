@@ -25,4 +25,4 @@ logs/
 .idea/
 
 # Playwright authentication sessions
-playwright/.auth/
+.auth/
