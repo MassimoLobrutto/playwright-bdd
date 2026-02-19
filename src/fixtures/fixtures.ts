@@ -39,26 +39,34 @@ function getPageFiles() {
 }
 
 type ApiFixtures = {
-  apiController: ApiController; // Name must match the implementation below
+  apiController: ApiController;
   apiResponse: { last: any };
 };
 
-type CombinedFixtures = Fixtures & ApiFixtures;
+// 1. Define the Scenario Data type
+type DataFixtures = {
+  scenarioData: any;
+};
+
+// 2. Include DataFixtures in the Combined type
+type CombinedFixtures = Fixtures & ApiFixtures & DataFixtures;
 
 export const test = base.extend<CombinedFixtures>({
-  // Spread the existing page file fixtures
   ...getPageFiles(),
-  apiController: async ({ request, baseURL }, use) => {
-    // No more hardcoded strings!
-    // It takes the URL from your config.
-    // If baseURL is missing, we provide a fallback or throw an error.
-    const controller = new ApiController(request, baseURL || '');
 
+  apiController: async ({ request, baseURL }, use) => {
+    const controller = new ApiController(request, baseURL || '');
     await use(controller);
   },
 
   apiResponse: async ({}, use) => {
     await use({ last: null });
+  },
+
+  // 3. Initialize the scenarioData fixture
+  scenarioData: async ({}, use) => {
+    // This object is unique to every test/scenario run
+    await use({});
   },
 });
 

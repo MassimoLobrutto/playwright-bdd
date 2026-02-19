@@ -11,20 +11,20 @@ test.describe('Test UI methods', () => {
 
   test.describe('Book a room', () => {
 
-    test('Example #1', { tag: ['@uiTests', '@regression'] }, async ({ Given, When, homepage, page, roomPage }) => { 
-      await Given('I navigate to the homepage', null, { page }); 
+    test('Example #1', { tag: ['@uiTests', '@regression'] }, async ({ Given, When, homepage, page, roomPage, scenarioData }) => { 
+      await Given('I navigate to the homepage', null, { page, scenarioData }); 
       await When('I search for available rooms from "05/03/2026" to "10/03/2026"', null, { homepage }); 
       await When('I select "Single" room and check that the price per night is "100"', null, { homepage, roomPage }); 
       await When('I check that the total price is "540" and then reserve the room', null, { roomPage }); 
-      await When('I fill in the booking form with valid details and submit', null, { roomPage }); 
+      await When('I fill in the booking form with valid details and submit', null, { roomPage, scenarioData }); 
     });
 
-    test('Example #2', { tag: ['@uiTests', '@regression'] }, async ({ Given, When, homepage, page, roomPage }) => { 
-      await Given('I navigate to the homepage', null, { page }); 
+    test('Example #2', { tag: ['@uiTests', '@regression'] }, async ({ Given, When, homepage, page, roomPage, scenarioData }) => { 
+      await Given('I navigate to the homepage', null, { page, scenarioData }); 
       await When('I search for available rooms from "05/04/2026" to "10/04/2026"', null, { homepage }); 
       await When('I select "Double" room and check that the price per night is "150"', null, { homepage, roomPage }); 
       await When('I check that the total price is "790" and then reserve the room', null, { roomPage }); 
-      await When('I fill in the booking form with valid details and submit', null, { roomPage }); 
+      await When('I fill in the booking form with valid details and submit', null, { roomPage, scenarioData }); 
     });
 
   });

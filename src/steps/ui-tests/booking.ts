@@ -1,9 +1,11 @@
 import { CalendarLabel } from '../../pages/ui-tests/home-page';
 import { expect, Given, Then, When } from '../../fixtures/fixtures';
 import { fakerEN_GB as faker } from '@faker-js/faker';
+import { logger } from '../../helper/logger/logger';
 
-Given('I navigate to the homepage', async ({ page }) => {
+Given('I navigate to the homepage', async ({ page, scenarioData }) => {
   await page.goto('https://automationintesting.online/');
+  scenarioData.sharingBetweenStepsTest = 'Populated in Given step';
 });
 
 When(
@@ -30,7 +32,8 @@ When('I check that the total price is {string} and then reserve the room', async
   await roomPage.reserveNowButton.click();
 });
 
-When('I fill in the booking form with valid details and submit', async ({ roomPage }) => {
+When('I fill in the booking form with valid details and submit', async ({ roomPage, scenarioData }) => {
+  logger.info(scenarioData.sharingBetweenStepsTest + ' but printed in When step');
   await roomPage.enterReservationDetails(
     faker.person.firstName(),
     faker.person.lastName(),
